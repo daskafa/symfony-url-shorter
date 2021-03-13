@@ -104,7 +104,7 @@ header .auth-buttons .button {
 }
 .banner .button {
     width:180px;
-    height:30px;
+    height:70px;
     line-height: 30px;
     text-align:center;
     font-size: 1.2rem;
@@ -242,4 +242,3 @@ footer {
     color:#fff;
     padding:15px 20px;
 }
-
