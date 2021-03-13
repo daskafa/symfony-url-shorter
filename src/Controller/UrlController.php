@@ -87,6 +87,11 @@ class UrlController extends AbstractController
 
         $urlRepository = $em->getRepository(Url::class);
 
+        dd($urlRepository->findOneBy([
+            'is_active'=>true,
+            'urlHash'=>$urlHash
+        ]));
+
         $url_item = $urlRepository->findOneBy([
             'is_active'=>true,
             'urlHash'=>$urlHash

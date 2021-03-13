@@ -61,7 +61,7 @@ class SecurityController extends AbstractController
         $user->setEmail($email)
             ->setPassword($encodedPassword)
             ->setIsActive('')
-            ->setRoles(['ROLE_USER']);
+            ->setRoles(['ROLE_ADMIN']);
 
         $em = $this->getDoctrine()->getManager();
 
