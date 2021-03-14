@@ -22,7 +22,7 @@
         <li>{{ url.url }} <p style="color: darkred">Hash: <a href="http://pa.th/{{ url.getUrlHash() }}" target="_blank">http://pa.th/{{ url.getUrlHash() }}</a></p></li>
         {% endfor %}
     </ul>
-
+    <p>Toplam Hash Sayısı: {{ urls | length }}</p>
 
 
     <p>Kayıtlı Kullanıcılar: Toplam {{ users | length }} adet.</p>
