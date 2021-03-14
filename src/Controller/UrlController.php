@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Detection\MobileDetect;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class UrlController extends AbstractController
@@ -87,10 +88,10 @@ class UrlController extends AbstractController
 
         $urlRepository = $em->getRepository(Url::class);
 
-        dd($urlRepository->findOneBy([
-            'is_active'=>true,
-            'urlHash'=>$urlHash
-        ]));
+//        dd($urlRepository->findOneBy([
+//            'is_active'=>true,
+//            'urlHash'=>$urlHash
+//        ]));
 
         $url_item = $urlRepository->findOneBy([
             'is_active'=>true,
@@ -109,21 +110,37 @@ class UrlController extends AbstractController
     }
 
     public function saveStats($urlId, Request $request){
+        $detect = new MobileDetect();
+        $ip = '15,393,728';
+        $geo = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='. $ip));
+        $city = $geo['geoplugin_city'];
+        $country = $geo['geoplugin_countryName'];
 
         $userAgent = $request->headers->get('User-Agent');
         $clientIp = $request->getClientIp();
 
         $em = $this->getDoctrine()->getManager();
 
+        $d = '';
+        if ($detect->isMobile()){
+            $d = 'Mobil';
+        }else if($detect->isTablet()){
+            $d = 'Tablet';
+        }else{
+            $d = 'Büyük İhtimal PC :)';
+        }
+
+
+
         $url_stats = new UrlStats();
         $url_stats->setUrlId($urlId)
             ->setBrowser($userAgent)
             ->setIpAddress($clientIp)
-            ->setDevice('-')
+            ->setDevice($d)
             ->setResolution('-')
-            ->setLocale('tr')
-            ->setCity('istanbul')
-            ->setCountry('turkey')
+            ->setLocale(\Locale::getDefault())
+            ->setCity($city)
+            ->setCountry($country)
             ->setCreatedAt( ( new \DateTime() ));
 
         $em->persist($url_stats);
