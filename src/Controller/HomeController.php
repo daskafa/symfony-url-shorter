@@ -22,7 +22,7 @@ class HomeController extends AbstractController
         $posts = $homepageInterfaceRepository->findAll();
 
 
-        return $this->render('home/index.html.twig', [
+        return $this->render('home/test.html.twig', [
             'posts' => $posts
         ]);
     }

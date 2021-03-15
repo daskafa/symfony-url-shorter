@@ -6,47 +6,57 @@
 
 
 {% block body %}
-    <header class="container d-flex align-items-center justify-content-between">
-        <div class="logo">
-            <img src="https://docrdsfx76ssb.cloudfront.net/static/1615406718/pages/wp-content/uploads/2019/02/bitly.png" alt="">
-        </div>
-        <div class="nav">
-            <nav>
-                <ul>
-                    <li><a href="#">Neden Biz</a></li>
-                    <li><a href="#">Çözümler</a></li>
-                    <li><a href="#">Özellikler</a></li>
-                    <li><a href="#">Ücretler</a></li>
-                    <li><a href="#">Kaynaklar</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="sign">
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Sign up</a></li>
-                <li><a href="#">Get a Quote</a></li>
-            </ul>
-        </div>
-    </header>
-{#gece 4:55 de arayüz yazma keyfi.. :D #}
-    <div class="container">
-        <div class="content d-flex justify-content-between align-items-center">
-            <div class="left">
-                <h3>Short links, big results</h3>
-                <p>A URL shortener built with powerful tools to help you grow and <br> protect your brand.</p>
-                <a href="#">Get Started for Free</a>
+
+
+    <div style="background-color: #071244">
+        <div class="px-96 flex justify-between items-center h-20">
+            <div>
+                <img src="https://cutt.ly/img/cuttly.svg" class="h-8" alt="">
             </div>
-            <div class="right">
-                <div class="image">
-                    <img src="https://docrdsfx76ssb.cloudfront.net/static/1615406718/pages/wp-content/uploads/2020/05/illo-mobile-810x480-1.jpg" alt="">
+            <div>
+                <ul class="flex">
+                    <li class="mr-8 text-white border-2 py-2 px-4 rounded-xl"><a href="#">Pricing</a></li>
+                    <li class="mr-8 text-white bg-green-500 py-2 px-4 rounded-xl"><a href="#">Login</a></li>
+                    <li class="     text-white bg-yellow-400 py-2 px-4 rounded-xl"><a href="#">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="bg-1 px-96">
+        <div class="grid grid-cols-2 h-full">
+            <div class="flex items-center">
+                <div class="col-span-1">
+                    <h3 class="text-6xl font-bold text-white">URL Shortener</h3>
+                    <p class="text-gray-400 text-2xl">Here you have full control over your links</p>
+                    <div class="mt-8">
+                        <a class="text-white bg-blue-500 py-3 rounded-full px-16 rounded-xl" href="#">Sign Up</a>
+                        <a class="text-white bg-green-500 py-3 rounded-full px-16 rounded-xl ml-4" href="#">Pricing</a>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <div class="col-span-1">
+                    <img class="h-96 mx-auto w-full object-contain" src="assets/images/circle.png" alt="">
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-
+    <div class="bg-gray-100 px-96">
+        <div class="mt-16 pb-64">
+            <h3 class="text-3xl text-center text-blue-900 font-bold">Link analytics, branded urls, URL shortener</h3>
+            <p class="text-sm text-center text-gray-500 mt-3">Don't let the links limit you. Make your links support your brand. The new standard of shortening links. A new standard for link analytics. Discover
+                <br> unique redirects analytics - work with your team together building your brand engagment. Manage your links like a pro.
+            </p>
+            <div class="flex justify-center mt-4">
+                <input class="w-2/4 h-12 border-2 rounded-xl border-blue-900 px-4 focus:outline-none" type="text">
+                <button class="bg-green-400 ml-8 py-0.5 px-8 rounded-xl text-white">Kısalt!</button>
+            </div>
+            <div class="mt-3">
+                <p class="text-center text-sm text-gray-400">By using our service you accept the <a class="text-blue-900 font-bold text-xs" href="#">Terms of service</a> and
+                    <a class="text-blue-900 font-bold text-xs" href="#">Privacy.</a> </p>
+            </div>
+        </div>
     </div>
 
 
