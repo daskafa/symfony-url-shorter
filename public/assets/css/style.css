@@ -17,6 +17,15 @@ body {
      background-size: cover;
      width: 100%;
  }
+ .nice-blue{
+     color: #071244;
+ }
+ .nice-blue-bg{
+     background-color: #071244;
+ }
+ .nice-green{
+     background: linear-gradient(280deg, rgba(130,52,0,1) 0%, rgba(196,86,13,1) 100%);
+ }
 /*p{*/
 /*    margin: 0;*/
 /*}*/
@@ -192,17 +201,17 @@ body {
 /*    flex-direction: column;*/
 /*    background: linear-gradient(190deg, rgba(14,158,251,1) 0%, rgba(92,255,248,1) 100%);*/
 /*}*/
-/*.url-form .form-error {*/
-/*    color:#fff;*/
-/*    background:rgba(239,83,80,1);*/
-/*    text-align: center;*/
-/*    margin-bottom:8px;*/
-/*    padding:10px 20px;*/
-/*    display: none;*/
-/*}*/
-/*.url-form .form-error.show {*/
-/*    display: block;*/
-/*}*/
+.url-form .form-error {
+    color:#fff;
+    background:rgba(239,83,80,1);
+    text-align: center;
+    margin-bottom:8px;
+    padding:10px 20px;
+    display: none;
+}
+.url-form .form-error.show {
+    display: block;
+}
 /*.url-form .form-success {*/
 /*    background:#007a41;*/
 /*    color:#fff;*/
