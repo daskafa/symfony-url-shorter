@@ -33,9 +33,9 @@ class ContactMessages
     private $message;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $okundumuBabacim;
+    private $is_read;
 
     public function getId(): ?int
     {
@@ -78,14 +78,14 @@ class ContactMessages
         return $this;
     }
 
-    public function getOkundumuBabacim(): ?string
+    public function getIsRead(): ?bool
     {
-        return $this->okundumuBabacim;
+        return $this->is_read;
     }
 
-    public function setOkundumuBabacim(?string $okundumuBabacim): self
+    public function setIsRead(?bool $is_read): self
     {
-        $this->okundumuBabacim = $okundumuBabacim;
+        $this->is_read = $is_read;
 
         return $this;
     }

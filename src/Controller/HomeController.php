@@ -56,7 +56,7 @@ class HomeController extends AbstractController
 
         $entityManager->remove($contactPost);
         $entityManager->flush();
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('contact_messages');
 
     }
 

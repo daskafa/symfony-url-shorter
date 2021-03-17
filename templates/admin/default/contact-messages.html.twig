@@ -23,64 +23,7 @@
     <div class="bg-white">
         <div class="grid grid-cols-12">
             <div class="col-span-2 px-4">
-                <div style="border-right: 1px solid rgb(226 226 226);">
-                    <div class="pt-4">
-                        <p class="">kullanici@kullanici.com</p>
-                    </div>
-                    <div class="mt-4">
-                        <a class="px-4 py-3 text-white rounded-full bg-green-500" href="#">Premium Al</a>
-                    </div>
-                    <div class="mt-12">
-                        <p class="font-bold">Genel</p>
-                    </div>
-                    <div class="mt-2">
-                        <ul>
-                            <li class="mt-3 flex">
-                                <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <a class="mt-2 ml-4" href="/admin">URL Listesi</a>
-                            </li>
-                            <li class="mt-3 flex">
-                                <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <a class="mt-2 ml-4" href="/admin/kayitli-kullanicilar">Kayıtlı Kullanıcılar <span class="nice-blue-bg text-white ml-1.5 px-2 py-1 rounded-full"></span> </a>
-                            </li>
-                            <li class="mt-3 flex">
-                                <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <a class="mt-2 ml-4" href="/admin/banner-alani-duzenleme">Banner Alanı Düzenleme</a>
-                            </li>
-                            <li class="mt-3 flex">
-                                <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <a class="mt-2 ml-4" href="/admin/gelen-mesajlar">Gelen Mesajlar</a>
-                            </li>
-                            <li class="mt-3 flex">
-                                <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <a class="mt-2 ml-4" href="#">xxx</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-12">
-                        <p class="font-bold">Profil</p>
-                    </div>
-                    <div class="mt-2">
-                        <ul>
-                            <li class="mt-3 flex">
-                                <svg class="w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                </svg>
-                                <a class="mt-2 ml-4" href="#">xxx</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                {% include 'admin/layouts/leftSection.html.twig' %}
             </div>
             <div class="col-span-10">
                 <div class="mt-4 bg-gray-200 h-full rounded-md">
@@ -99,14 +42,18 @@
                                      <h3 class="mb-2 text-gray-400">Mesajı: </h3>
                                      <p>{{ message.message }}</p>
                                      <p class="text-right mr-6"><a href="/delete-post/{{ message.id }}">Mesajı Sil</a> </p>
-                                     <span class="text-right mr-6 text-blue-800 font-bold"><a href="">
-                                             {% if message.getOkundumuBabacim() == 'evet' %}
-                                                 <p>Burası 1 </p>
-                                             {% else %}
-                                                 <p>Diğer durum</p>
-                                             {% endif %}
-                                         </a></span>
+
                                  </div>
+                                 <span class="text-right mr-6 font-bold">
+                                             {% if message.getIsRead() == 0 %}
+                                                 <p class="border-2 bg-red-900 text-white p-2">Henüz Okunmadı</p>
+                                                 <p class="mt-4 p-3 bg-gray-900 text-white"><a href="/admin/gelen-mesajlar/{{ message.id }}">Durumu Değiştir</a></p>
+                                             {% endif %}
+                                             {% if message.getIsRead() == 1 %}
+                                                     <p class="border-2 bg-green-900 text-white p-2">Mesaj Okundu</p>
+                                                     <p class="mt-4 p-3 bg-gray-900 text-white"><a href="/admin/gelen-mesajlar/{{ message.id }}">Durumu Değiştir</a></p>
+                                             {% endif %}
+                                         </span>
                              </div>
                          </div>
                          {% endfor %}
