@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\ContactMessages;
+use App\Entity\HomepageInterface;
 use App\Entity\Url;
 use App\Entity\User;
 use App\Repository\ContactMessagesRepository;

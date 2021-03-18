@@ -6,6 +6,7 @@ use App\Entity\ContactMessages;
 use App\Entity\Features;
 use App\Entity\HomepageInterface;
 use App\Entity\PageConfigs;
+use App\Entity\User;
 use App\Repository\ContactMessagesRepository;
 use App\Repository\FeaturesRepository;
 use App\Repository\HomepageInterfaceRepository;
@@ -16,6 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DefaultController extends AbstractController
 {
@@ -185,6 +188,32 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('features');
     }
+
+    #[Route('/admin/profil-guncelle', name: 'profil_update')]
+    public function pageProfilView(UserRepository $userRepository){
+        $users = $userRepository->findAll();
+        return $this->render('admin/default/profil-update.html.twig', [
+            'users' => $users
+        ]);
+    }
+
+    #[Route('/admin/profil-guncelle/{id}', name: 'xxx')]
+    public  function pageProfilUpdate(int $id, Request $request, UserPasswordEncoderInterface $encoder, AuthenticationUtils $authenticationUtils, UserRepository $userRepository){
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+//        $user = $userRepository->findAll();
+
+
+        $email = $request->get('email');
+        $encodedPassword = $encoder->encodePassword($user, $request->get('password'));
+        $user->setEmail($email)
+            ->setPassword($encodedPassword);
+
+        $em->persist($user);
+        $em->flush();
+        return $this->redirectToRoute('profil_update');
+    }
+
 
 
 
