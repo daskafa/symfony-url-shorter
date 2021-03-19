@@ -12,23 +12,19 @@
 
 
 
-
     <div style="background-color: #071244">
         <div class="px-96 flex justify-between items-center h-20">
-            <div>
-                <img src="{{ posts[0].getLogo }}" class="h-12" alt="">
-            </div>
-            <div>
-                <ul class="flex">
-                    <li class="mr-8 text-white border-2 py-2 px-4 rounded-xl"><a href="#">Pricing</a></li>
-                    <li class="mr-8 text-white bg-green-500 py-2 px-4 rounded-xl"><a href="/login">Login</a></li>
-                    <li class="     text-white bg-yellow-400 py-2 px-4 rounded-xl"><a href="/signupview">Sign Up</a></li>
-                </ul>
-            </div>
+            {% include 'home/layouts/header.html.twig' %}
         </div>
     </div>
 
+
     <div class="bg-1 px-96">
+        <style>
+            .bg-1{
+                height: 100%;
+            }
+        </style>
         <div class="text-1xl text-white mb-6 text-center mt-36">
             Bizimle İletişime Geçin!
         </div>
@@ -60,90 +56,7 @@
 
 
 
-{#    <div class="homepage">#}
-{#<h1>{{ posts[0].getLogo }}</h1>#}
-{#        <section class="banner">#}
-{#            <div class="container">#}
-{#                <div class="col w-50p">#}
-{#                    <h1>{{ posts[0].getTitle }}</h1>#}
-{#                    <p>{{ posts[0].getDescription }}#}
-{#                    </p>#}
-{#                    <a href="/signup" class="button button-primary">{{ posts[0].getButtonText }}</a>#}
-{#                </div>#}
-{#                <div class="col w-50p">#}
-{#                    <img src="{{ posts[0].getRightImage }}"/>#}
-{#                </div>#}
-{#            </div>#}
-{#        </section>#}
 
-
-
-{#        <div class="url-form">#}
-{#            <div class="container row">#}
-
-{#                <form action="/url/create" method="post" onsubmit="return createShortUrl()">#}
-{#                    <input id="urlinput" type="text" name="url" placeholder="Shorten your link" />#}
-{#                    <button id="shortenButton" class="button button-primary" type="submit">Shorten</button>#}
-{#                </form>#}
-
-{#                <div class="url-form-terms">#}
-{#                    {{ posts[0].getPrivacyPolicy }}#}
-{#                    <a href="/terms">{{ posts[0].getPrivacyPolicyFirst }}</a> and <a href="/privacy">{{ posts[0].getPrivacyPolicyTwo }}</a>#}
-{#                </div>#}
-
-{#                <div class="flash-messages">#}
-{#                    <div class="form-error"></div>#}
-{#                    <div class="form-success"></div>#}
-{#                </div>#}
-
-{#            </div>#}
-{#        </div>#}
-
-
-{#        <section class="features">#}
-{#            <div class="container row">#}
-{#                <h3 class="features-title">{{ posts[0].getFeaturesTitle }}</h3>#}
-{#                <p class="features-description">#}
-{#                    {{ posts[0].getFeaturesDescription }}#}
-{#                </p>#}
-
-{#                <div class="feature-rows">#}
-{#                    <div class="feature">#}
-{#                        <img src="{{ posts[0].getFeaturesItem1Image }}" />#}
-{#                        <h3>{{ posts[0].getFeaturesItem1Title }}</h3>#}
-{#                        <p>#}
-{#                            {{ posts[0].getFeaturesItem1Description }}#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="feature">#}
-{#                        <img src="{{ posts[0].getFeaturesItem2Image }}" />#}
-{#                        <h3>{{ posts[0].getFeaturesItem2Title }}</h3>#}
-{#                        <p>#}
-{#                            {{ posts[0].getFeaturesItem2Description }}#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="feature">#}
-{#                        <img src="{{ posts[0].getFeaturesItem3Image }}" />#}
-{#                        <h3>{{ posts[0].getFeaturesItem3Title }}</h3>#}
-{#                        <p>#}
-{#                            {{ posts[0].getFeaturesItem3Description }}#}
-{#                        </p>#}
-{#                    </div>#}
-{#                </div>#}
-
-{#            </div>#}
-{#        </section>#}
-
-
-{#        <section class="happy-customers">#}
-{#            <div class="container">#}
-
-{#            </div>#}
-{#        </section>#}
-
-{#    </div>#}
 {% endblock %}
 
 

@@ -7,33 +7,22 @@
 
 
 
-    <div class="nice-blue-bg">
-        <div class="grid grid-cols-12">
-            <div class="col-span-2 px-4">
-                <div style="border-right: 1px solid rgb(226 226 226);" class="flex items-center h-14 border-gray-500">
-                    <img src="https://cutt.ly/img/cuttly.svg" class="h-10 mx-auto" alt="">
-                </div>
-            </div>
-            <div class="col-span-10">
-
-            </div>
-        </div>
-    </div>
+{% include 'admin/layouts/header.html.twig' %}
 
     <div class="bg-white">
         <div class="grid grid-cols-12">
-            <div class="col-span-2 px-4">
+            <div class="col-span-2">
                 {% include 'admin/layouts/leftSection.html.twig' %}
             </div>
             <div class="col-span-10">
-                <div class="mt-4 bg-gray-200 h-full rounded-md">
+                <div class="h-full rounded-md">
 
                     <h3 class="text-center text-3xl pt-4">Gelen Mesajlar</h3>
 
                      <div class="grid grid-cols-3">
                          {% for message in messages %}
                          <div class="col-span-1">
-                             <div class="bg-white shadow-md p-3 m-3">
+                             <div class="bg-white shadow-md p-3 m-3 h-64">
                                  <div class="mt-4">
                                      <p class="text-gray-400">Mesajı Gönderen: <span class="text-gray-600">{{ message.name }}</span> </p>
                                      <p class="text-gray-400">Mail Adresi: <span class="text-gray-600">{{ message.email }}</span> </p>
@@ -41,19 +30,19 @@
                                  <div class="mt-6">
                                      <h3 class="mb-2 text-gray-400">Mesajı: </h3>
                                      <p>{{ message.message }}</p>
-                                     <p class="text-right mr-6"><a href="/delete-post/{{ message.id }}">Mesajı Sil</a> </p>
+                                     <p class="text-right mr-6 mt-6 text-red-600 font-bold"><a class="rounded-md border-2 p-4 bg-red-500 text-white" href="/delete-post/{{ message.id }}">Mesajı Sil</a> </p>
 
                                  </div>
-                                 <span class="text-right mr-6 font-bold">
+                                 <div class="text-right mr-6 font-bold flex space-between">
                                              {% if message.getIsRead() == 0 %}
-                                                 <p class="border-2 bg-red-900 text-white p-2">Henüz Okunmadı</p>
-                                                 <p class="mt-4 p-3 bg-gray-900 text-white"><a href="/admin/gelen-mesajlar/{{ message.id }}">Durumu Değiştir</a></p>
+                                                 <p><span class="bg-red-500 text-white p-2 rounded-md">Henüz Okunmadı</span></p>
+                                                 <p class="ml-3"><a class=" bg-gray-600 text-white p-2 rounded-md" href="/admin/gelen-mesajlar/{{ message.id }}">Durumu Değiştir</a></p>
                                              {% endif %}
                                              {% if message.getIsRead() == 1 %}
-                                                     <p class="border-2 bg-green-900 text-white p-2">Mesaj Okundu</p>
-                                                     <p class="mt-4 p-3 bg-gray-900 text-white"><a href="/admin/gelen-mesajlar/{{ message.id }}">Durumu Değiştir</a></p>
+                                                 <p><span class="bg-green-600 text-white p-2 rounded-md">Mesaj Okundu</span></p>
+                                                 <p class="ml-3"><a class=" bg-gray-600 text-white p-2 rounded-md" href="/admin/gelen-mesajlar/{{ message.id }}">Durumu Değiştir</a></p>
                                              {% endif %}
-                                         </span>
+                                 </div>
                              </div>
                          </div>
                          {% endfor %}

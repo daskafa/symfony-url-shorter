@@ -25,23 +25,28 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class DefaultController extends AbstractController
 {
     #[Route('/admin', name: 'admin_default')]
-    public function index(Helpers $helpers): Response
+    public function index(Helpers $helpers, ContactMessagesRepository $contactMessagesRepository): Response
     {
         $em = $this->getDoctrine()->getManager();
 
         $urls = $em->getRepository(Url::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
+        $messages = $em->getRepository(ContactMessages::class)->findAll();
         return $this->render('admin/default/index.html.twig', [
             'urls' => $urls,
-            'users' => $users
+            'users' => $users,
+            'messages' => $messages
         ]);
     }
 
     #[Route('/admin/kayitli-kullanicilar', name: 'kayitli_kullanicilar')]
-    public function registeredUsers(Request $request, UserRepository $userRepository): Response{
+    public function registeredUsers(Request $request, UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository): Response{
+        $em = $this->getDoctrine()->getManager();
         $users = $userRepository->findAll();
+        $messages = $em->getRepository(ContactMessages::class)->findAll();
         return $this->render('admin/default/registered-users.html.twig',[
-            'users' => $users
+            'users' => $users,
+            'messages' => $messages
         ]);
     }
 
@@ -102,10 +107,13 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/admin/sayfa-ayarlari', name: 'page_config')]
-    public function pageConfigsView(UserRepository $userRepository){
+    public function pageConfigsView(UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository){
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository(ContactMessages::class)->findAll();
         $users = $userRepository->findAll();
         return $this->render('admin/default/page-config.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'messages' => $messages
         ]);
     }
 
@@ -170,13 +178,17 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/admin/ozellikler', name: 'features')]
-    public function pageFeatures(UserRepository $userRepository, FeaturesRepository $featuresRepository){
+    public function pageFeatures(UserRepository $userRepository, FeaturesRepository $featuresRepository, ContactMessagesRepository $contactMessagesRepository){
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository(ContactMessages::class)->findAll();
         $users = $userRepository->findAll();
         $feature = $featuresRepository->findAll();
 
+
         return $this->render('admin/default/features.html.twig', [
             'users' => $users,
-            'feature' => $feature
+            'feature' => $feature,
+            'messages' => $messages
         ]);
     }
 
@@ -194,10 +206,13 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/admin/profil-guncelle', name: 'profil_update')]
-    public function pageProfilView(UserRepository $userRepository){
+    public function pageProfilView(UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository){
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository(ContactMessages::class)->findAll();
         $users = $userRepository->findAll();
         return $this->render('admin/default/profil-update.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'messages' => $messages
         ]);
     }
 

@@ -35,10 +35,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/iletisim', name: 'contact')]
-    public function contactView(HomepageInterfaceRepository $homepageInterfaceRepository){
+    public function contactView(HomepageInterfaceRepository $homepageInterfaceRepository, PageConfigsRepository $pageConfigsRepository){
         $posts = $homepageInterfaceRepository->findAll();
+        $pageConfigs = $pageConfigsRepository->findAll();
         return $this->render('home/contact.html.twig', [
-           'posts' => $posts
+           'posts' => $posts,
+           'configs' => $pageConfigs
         ]);
     }
 
