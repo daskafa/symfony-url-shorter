@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\PageConfigsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,18 +16,22 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(PageConfigsRepository $pageConfigsRepository ,AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
-
+        $pageConfigs = $pageConfigsRepository->findAll();
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'configs' => $pageConfigs
+        ]);
     }
 
     /**
@@ -40,8 +45,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/signupview", name="app_signup_view")
      */
-    public function signupView(): Response{
-        return $this->render('security/signup.html.twig');
+    public function signupView(PageConfigsRepository $pageConfigsRepository): Response{
+        $pageConfigs = $pageConfigsRepository->findAll();
+        return $this->render('security/signup.html.twig', [
+            'configs' => $pageConfigs
+        ]);
     }
 
 
@@ -68,7 +76,7 @@ class SecurityController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        return new Response('User created !');
+        return $this->redirectToRoute('admin_default');
 
     }
 }

@@ -27,17 +27,16 @@
             </div>
             <div class="col-span-10">
                 <div class="mt-4 bg-gray-200 rounded-md">
-
-
-
                     <section class="text-gray-600 body-font">
                         <div class="container px-5 py-24 mx-auto">
                             <div class="text-center mb-10">
-                                <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">Kısaltma Yapılmış URL Listesi ve Hash'leri:</h1>
+                                <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">Sizin Oluşturduğunuz URL Listeniz</h1>
 {#                                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug.</p>#}
                             </div>
                             <div class="flex flex-wrap lg:w-11/12 sm:mx-auto sm:mb-2 -mx-2">
                                 {% for url in urls %}
+                                    {% if url.userid != 0 %}
+                                        {% if helpers.getUser(url.userId).email == app.user.username %}
                                 <div class="p-2 mt-2 sm:w-1/2 w-full">
                                     <div class="bg-gray-100 rounded-lg shadow-md flex p-4 justify-between h-full items-center">
                                         <div class="flex">
@@ -50,13 +49,21 @@
                                         <a class="nice-blue-bg text-white py-3 px-2 rounded-lg" href="http://pa.th/{{ url.getUrlHash() }}" target="_blank">http://pa.th/{{ url.getUrlHash() }}</a>
                                     </div>
                                 </div>
+{#                                {% else %}#}
+{#                                <p>ikinci blok</p>#}
+                                {% endif %}
+                                {% endif %}
                                 {% endfor %}
 
                             </div>
                         </div>
                     </section>
 
-
+                    {#                                        {% if url.userid == 0 %}#}
+                    {#                                            <td>Anonim</td>#}
+                    {#                                        {% else %}#}
+                    {#                                            <td>{{ helpers.getUser(url.userId).email }}</td>#}
+                    {#                                        {% endif %}#}
 
 
 

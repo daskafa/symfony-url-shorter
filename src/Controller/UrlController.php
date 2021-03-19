@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Url;
 use App\Entity\UrlStats;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Detection\MobileDetect;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +21,7 @@ class UrlController extends AbstractController
 {
 
     #[Route('/url/create', name: 'url_create')]
-    public function create(Request $request, ValidatorInterface $validator): Response
+    public function create(Request $request, ValidatorInterface $validator, AuthenticationUtils $authenticationUtils): Response
     {
 
         $url = $request->get('url');
@@ -53,16 +56,26 @@ class UrlController extends AbstractController
             $url_hash = substr( str_shuffle($alpha_numeric),0,5);
 
             $em = $this->getDoctrine()->getManager();
+//            $user = new User();
+
+
+            $getUser = $this->getUser();
 
             $url_item = new Url();
             $url_item->setUrl($url)
                 ->setUrlHash( $url_hash )
                 ->setCreatedAt( (new \DateTime()) )
-                ->setUserId(1)
                 ->setClickCount(0)
                 ->setIsPublic(true)
                 ->setExpiredAt(( new \DateTime() ))
                 ->setIsActive(true);
+
+            if( is_null( $this->getUser() ) ) {
+                $url_item->setUserId(0);
+            } else {
+                $user_id=$this->getUser()->getId();
+                $url_item->setUserId($getUser->getId());
+            }
 
             $em->persist($url_item);
             $em->flush();

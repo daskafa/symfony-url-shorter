@@ -2,11 +2,15 @@
 namespace App\Controller;
 
 use App\Entity\ContactMessages;
+use App\Entity\Features;
 use App\Entity\HomepageInterface;
+use App\Entity\PageConfigs;
 use App\Entity\Url;
 use App\Entity\User;
 use App\Repository\ContactMessagesRepository;
+use App\Repository\FeaturesRepository;
 use App\Repository\HomepageInterfaceRepository;
+use App\Repository\PageConfigsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,12 +21,16 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(HomepageInterfaceRepository $homepageInterfaceRepository): Response
+    public function index(HomepageInterfaceRepository $homepageInterfaceRepository, PageConfigsRepository $pageConfigsRepository, FeaturesRepository $featuresRepository): Response
     {
         # TODO : GET CMS data from RDBMS DB
         $posts = $homepageInterfaceRepository->findAll();
+        $pageConfigs = $pageConfigsRepository->findAll();
+        $features = $featuresRepository->findAll();
         return $this->render('home/index.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'configs' => $pageConfigs,
+            'features' => $features
         ]);
     }
 

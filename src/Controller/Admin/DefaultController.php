@@ -6,6 +6,7 @@ use App\Entity\ContactMessages;
 use App\Entity\Features;
 use App\Entity\HomepageInterface;
 use App\Entity\PageConfigs;
+use App\Entity\Url;
 use App\Entity\User;
 use App\Repository\ContactMessagesRepository;
 use App\Repository\FeaturesRepository;
@@ -13,6 +14,7 @@ use App\Repository\HomepageInterfaceRepository;
 use App\Repository\PageConfigsRepository;
 use App\Repository\UrlRepository;
 use App\Repository\UserRepository;
+use App\Service\Helpers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +25,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class DefaultController extends AbstractController
 {
     #[Route('/admin', name: 'admin_default')]
-    public function index(UrlRepository $urlRepository, UserRepository $userRepository, Request $request): Response
+    public function index(Helpers $helpers): Response
     {
-        $urls = $urlRepository->findAll();
-        $users = $userRepository->findAll();
+        $em = $this->getDoctrine()->getManager();
+
+        $urls = $em->getRepository(Url::class)->findAll();
+        $users = $em->getRepository(User::class)->findAll();
         return $this->render('admin/default/index.html.twig', [
             'urls' => $urls,
             'users' => $users
@@ -176,7 +180,7 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/ozellikler/{id}', name: 'xxx')]
+    #[Route('/admin/ozellikler/{id}', name: 'features_update')]
     public function pageFeatureUpdate(int $id, Request $request){
         $em = $this->getDoctrine()->getManager();
         $feature = $em->getRepository(Features::class)->find($id);

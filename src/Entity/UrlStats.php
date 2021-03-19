@@ -23,7 +23,7 @@ class UrlStats
     private $url_id;
 
     /**
-     * @ORM\Column(type="string", length=120)
+     * @ORM\Column(type="text")
      */
     private $browser;
 

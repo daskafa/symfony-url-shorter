@@ -52,10 +52,6 @@ class Url
      */
     private $is_active;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $user_id;
 
     /**
      * @ORM\Column(type="integer")
@@ -71,6 +67,11 @@ class Url
      * @ORM\Column(type="datetime")
      */
     private $expired_at;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $user_id;
 
     public function getId(): ?int
     {
@@ -149,17 +150,7 @@ class Url
         return $this;
     }
 
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
 
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
 
     public function getClickCount(): ?int
     {
@@ -193,6 +184,18 @@ class Url
     public function setExpiredAt(\DateTimeInterface $expired_at): self
     {
         $this->expired_at = $expired_at;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(int $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -38,6 +40,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Url::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $urls;
+
+    public function __construct()
+    {
+        $this->urls = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +140,36 @@ class User implements UserInterface
     public function setIsActive(bool $is_active): self
     {
         $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Url[]
+     */
+    public function getUrls(): Collection
+    {
+        return $this->urls;
+    }
+
+    public function addUrl(Url $url): self
+    {
+        if (!$this->urls->contains($url)) {
+            $this->urls[] = $url;
+            $url->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUrl(Url $url): self
+    {
+        if ($this->urls->removeElement($url)) {
+            // set the owning side to null (unless already changed)
+            if ($url->getUser() === $this) {
+                $url->setUser(null);
+            }
+        }
 
         return $this;
     }
