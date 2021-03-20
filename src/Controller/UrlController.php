@@ -58,8 +58,9 @@ class UrlController extends AbstractController
             $em = $this->getDoctrine()->getManager();
 //            $user = new User();
 
-
+            $rep = $em->getRepository(User::class);
             $getUser = $this->getUser();
+            $user = $rep->find($getUser->getId());
 
             $url_item = new Url();
             $url_item->setUrl($url)
@@ -68,15 +69,16 @@ class UrlController extends AbstractController
                 ->setClickCount(0)
                 ->setIsPublic(true)
                 ->setExpiredAt(( new \DateTime() ))
-                ->setIsActive(true);
+                ->setIsActive(true)
+                ->setUser($user);
 
             if( is_null( $this->getUser() ) ) {
                 $url_item->setUserId(0);
             } else {
-                $user_id=$this->getUser()->getId();
+//                $user_id=$this->getUser()->getId();
                 $url_item->setUserId($getUser->getId());
             }
-
+//            dd($url_item);
             $em->persist($url_item);
             $em->flush();
 

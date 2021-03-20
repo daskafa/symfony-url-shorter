@@ -42,7 +42,7 @@ class User implements UserInterface
     private $is_active;
 
     /**
-     * @ORM\OneToMany(targetEntity=Url::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Url::class, mappedBy="user")
      */
     private $urls;
 
@@ -173,4 +173,9 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+
+
+
 }

@@ -67,15 +67,15 @@ class DefaultController extends AbstractController
         ]);
     }
 
-//    #[Route('/admin/kayitli-kullanicilar/{id}', name: 'registered_users_delete')]
-//    public function deleteRegisteredUsers(int $id){
-//        $em = $this->getDoctrine()->getManager();
-//        $users = $em->getRepository(User::class)->find($id);
-//        $em->remove($users);
-//        $em->flush();
-//
-//        return $this->redirectToRoute('admin_default');
-//    }
+    #[Route('/admin/kayitli-kullanicilar/delete/{id}', name: 'registered_users_delete')]
+    public function deleteRegisteredUsers(int $id){
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->find($id);
+        $em->remove($users);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_default');
+    }
 
 
       #[Route('/admin/kayitli-kullanicilar/edit/{id}', name: 'registered_users_update_page')]

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UrlRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -69,9 +71,14 @@ class Url
     private $expired_at;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer" , nullable=true)
      */
     private $user_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="urls")
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -196,6 +203,18 @@ class Url
     public function setUserId(int $user_id): self
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

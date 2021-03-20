@@ -19,7 +19,7 @@ class Helpers
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['id' => $userId]);
         if ( is_null($user)) {
-            return 0;
+            return false;
         }
         return $user;
     }
@@ -27,7 +27,7 @@ class Helpers
     public function getUrls(int $urlId){
         $url = $this->entityManager->getRepository(Url::class)->findOneBy([ 'id' => $urlId ]);
         if ( is_null($url) ){
-            return 0;
+            return false;
         }
         return $url;
     }
