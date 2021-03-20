@@ -41,7 +41,8 @@
 {#                                    {{ dump(helpers.getUrls(urlStat.getUrlId)) }}#}
 {#                                        {{ dump(urlStat.urlId) }}#}
                                 {% if urlStat.getUrlId != 0 %}
-                                    {{ dump(urlStat.UrlId) }}
+{#                                    {{ dump(urlStat.getUrlId()) }}#}
+                                    {{ helpers.getUrls(urlStat.getUrlId).url }}
 {#                                    {% if urlStat.UrlId == helpers.getUrls(urlStat.getUrlId).getUserId %}#}
 {#                                        ilk durum#}
 {#                                        {% else %}#}

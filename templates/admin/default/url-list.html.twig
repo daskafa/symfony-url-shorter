@@ -1,0 +1,36 @@
+{% extends 'admin/layouts/adminBase.html.twig' %}
+{% block body %}
+{% include 'admin/layouts/header.html.twig' %}
+    <div class="bg-white">
+        <div class="grid grid-cols-12">
+            <div class="col-span-2">
+                {% include 'admin/layouts/leftSection.html.twig' %}
+            </div>
+            <div class="col-span-10">
+                <div class="rounded-md">
+                    <div class="text-center mt-10">
+                        <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">Tüm Kullanıcıların URL Listesi</h1>
+                        {#                                <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug.</p>#}
+                    </div>
+                    <div class="flex flex-wrap lg:w-11/12 sm:mx-auto sm:mb-2 -mx-2">
+                    {% for url in urls %}
+                        <div class="p-2 mt-2 sm:w-1/2 w-full">
+                            <div class="bg-gray-100 rounded-lg shadow-md flex p-4 justify-between h-full items-center">
+                                <div class="flex">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-green-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                                        <path d="M22 4L12 14.01l-3-3"></path>
+                                    </svg>
+                                    <span class="title-font font-bold text-green-500 mr-4">{{ url.url }}</span>
+                                </div>
+                                <a class="nice-blue-bg text-white py-3 px-2 rounded-lg" href="http://pa.th/{{ url.getUrlHash() }}" target="_blank">http://pa.th/{{ url.getUrlHash() }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

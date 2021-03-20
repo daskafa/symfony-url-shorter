@@ -25,7 +25,7 @@ class Helpers
     }
 
     public function getUrls(int $urlId){
-        $url = $this->entityManager->getRepository(Url::class)->findOneBy([ 'user_id' => $urlId ]);
+        $url = $this->entityManager->getRepository(Url::class)->findOneBy([ 'id' => $urlId ]);
         if ( is_null($url) ){
             return 0;
         }

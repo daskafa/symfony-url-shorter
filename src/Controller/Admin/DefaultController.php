@@ -41,6 +41,21 @@ class DefaultController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/tum-url-listesi', name: 'url_list')]
+    public function urlList(UrlRepository $urlRepository, UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository){
+        $urls = $urlRepository->findAll();
+        $users = $userRepository->findAll();
+        $messages = $contactMessagesRepository->findAll();
+
+        return $this->render('admin/default/url-list.html.twig',[
+            'urls' => $urls,
+            'users' => $users,
+            'messages' => $messages
+        ]);
+    }
+
+
+
     #[Route('/admin/kayitli-kullanicilar', name: 'registered_users')]
     public function registeredUsers(UserRepository $userRepository): Response{
         $em = $this->getDoctrine()->getManager();
