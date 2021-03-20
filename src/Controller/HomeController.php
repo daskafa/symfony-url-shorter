@@ -45,7 +45,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/iletisimPost', name: 'contactPost')]
-    public function contactPost(ContactMessagesRepository $contactMessagesRepository, Request $request){
+    public function contactPost( Request $request){
         $em = $this->getDoctrine()->getManager();
 
         $contactPosts = new ContactMessages();
@@ -61,7 +61,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/delete-post/{id}', name: 'deletePost')]
-    public function deleteContactPost(int $id, ContactMessagesRepository $contactMessagesRepository, Request $request){
+    public function deleteContactPost(int $id){
         $entityManager = $this->getDoctrine()->getManager();
         $contactPost = $entityManager->getRepository(ContactMessages::class)->find($id);
 

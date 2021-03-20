@@ -1,0 +1,131 @@
+{% extends 'admin/layouts/adminBase.html.twig' %}
+
+{#{% block title %}Hello DefaultController!{% endblock %}#}
+
+{% block body %}
+    {#    {% if is_granted('ROLE_ADMIN') %} ... burası admin {% endif %}#}
+
+
+
+    {% include 'admin/layouts/header.html.twig' %}
+
+
+    <div class="bg-white">
+        <div class="grid grid-cols-12">
+            <div class="col-span-2">
+                {% include 'admin/layouts/leftSection.html.twig' %}
+            </div>
+            <div class="col-span-10">
+                <div class="h-full rounded-md">
+
+
+                    <!-- component -->
+                    <table class="border-collapse w-4/2 mx-auto mt-24">
+                        <thead>
+                        <tr>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">URL</th>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Tarayıcı</th>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">IP Adresi</th>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Cihaz</th>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Lokal</th>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Şehir</th>
+                            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Ülke</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for urlStat in urlStats %}
+
+                        <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Company name</span>
+{#                                    {{ dump(helpers.getUrls(urlStat.getUrlId)) }}#}
+{#                                        {{ dump(urlStat.urlId) }}#}
+                                {% if urlStat.getUrlId != 0 %}
+                                    {{ dump(urlStat.UrlId) }}
+{#                                    {% if urlStat.UrlId == helpers.getUrls(urlStat.getUrlId).getUserId %}#}
+{#                                        ilk durum#}
+{#                                        {% else %}#}
+{#                                        ikinci durum#}
+{#                                    {% endif %}#}
+
+                                    {#                                {% if helpers.getUrls(urlStat.url_id).url == app.user.username %}#}
+{#                                    {{ helpers.getUrls(urlStat.getUrlId).url }}#}
+
+                                {% endif %}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
+                                {{ urlStat.browser }}
+
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
+                                {{ urlStat.IpAddress }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
+                                {{ urlStat.device }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
+                                {{ urlStat.locale }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
+                                {{ urlStat.city }}
+                            </td>
+                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Country</span>
+                                {{ urlStat.country }}
+                            </td>
+{#                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">#}
+{#                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Status</span>#}
+{#                                <span class="rounded bg-red-400 py-1 px-3 text-xs font-bold">deleted</span>#}
+{#                            </td>#}
+{#                            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">#}
+{#                                <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>#}
+{#                                <a href="#" class="text-blue-400 hover:text-blue-600 underline">Edit</a>#}
+{#                                <a href="#" class="text-blue-400 hover:text-blue-600 underline pl-6">Remove</a>#}
+{#                            </td>#}
+                            {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    {#<div class="example-wrapper">#}
+
+
+    {#    <p>Kısaltma Yapılmış URL Listesi ve Hash'leri: </p>#}
+    {#    <ul>#}
+    {#        {% for url in urls %}#}
+    {#        <li>{{ url.url }} <p style="color: darkred">Hash: <a href="http://pa.th/{{ url.getUrlHash() }}" target="_blank">http://pa.th/{{ url.getUrlHash() }}</a></p></li>#}
+    {#        {% endfor %}#}
+    {#    </ul>#}
+    {#    <p>Toplam Hash Sayısı: {{ urls | length }}</p>#}
+
+
+    {#    <p>Kayıtlı Kullanıcılar: Toplam {{ users | length }} adet.</p>#}
+    {#    <ul>#}
+    {#        {% for user in users %}#}
+    {#        <li>{{ user.email }}</li>#}
+    {#        {% endfor %}#}
+    {#    </ul>#}
+
+
+
+
+    {#</div>#}
+{% endblock %}

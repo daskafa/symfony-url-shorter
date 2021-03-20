@@ -13,6 +13,7 @@ use App\Repository\FeaturesRepository;
 use App\Repository\HomepageInterfaceRepository;
 use App\Repository\PageConfigsRepository;
 use App\Repository\UrlRepository;
+use App\Repository\UrlStatsRepository;
 use App\Repository\UserRepository;
 use App\Service\Helpers;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,12 +21,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DefaultController extends AbstractController
 {
     #[Route('/admin', name: 'admin_default')]
-    public function index(Helpers $helpers, ContactMessagesRepository $contactMessagesRepository): Response
+    public function index(): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -39,8 +41,8 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/kayitli-kullanicilar', name: 'kayitli_kullanicilar')]
-    public function registeredUsers(Request $request, UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository): Response{
+    #[Route('/admin/kayitli-kullanicilar', name: 'registered_users')]
+    public function registeredUsers(UserRepository $userRepository): Response{
         $em = $this->getDoctrine()->getManager();
         $users = $userRepository->findAll();
         $messages = $em->getRepository(ContactMessages::class)->findAll();
@@ -49,6 +51,53 @@ class DefaultController extends AbstractController
             'messages' => $messages
         ]);
     }
+
+//    #[Route('/admin/kayitli-kullanicilar/{id}', name: 'registered_users_delete')]
+//    public function deleteRegisteredUsers(int $id){
+//        $em = $this->getDoctrine()->getManager();
+//        $users = $em->getRepository(User::class)->find($id);
+//        $em->remove($users);
+//        $em->flush();
+//
+//        return $this->redirectToRoute('admin_default');
+//    }
+
+
+      #[Route('/admin/kayitli-kullanicilar/edit/{id}', name: 'registered_users_update_page')]
+      public function editRegisteredUsers(int $id, UserRepository $userRepository){
+        $users = $userRepository->findAll();
+        return $this->render('admin/default/edit-users.html.twig', [
+            'users' => $users
+        ]);
+      }
+
+      #[Route('/admin/kayitli-kullanicilar/editpost/{id}', name: 'registered_users_update_page_post')]
+      public function editRegisteredUsersX(int $id, Request $request){
+          $em = $this->getDoctrine()->getManager();
+          $user = $em->getRepository(User::class)->find($id);
+          $user->setEmail($request->get('mail'))
+              ->setPassword($request->get('password'));
+          $em->persist($user);
+          $em->flush();
+
+        return $this->render('admin/default/edit-users.html.twig');
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    #[Route('/admin/banner-alani-duzenleme', name: 'banner_alani_duzenleme')]
 //    public function bannerField(): Response{
@@ -216,7 +265,7 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/profil-guncelle/{id}', name: 'xxx')]
+    #[Route('/admin/profil-guncelle/{id}', name: 'profil_update_id')]
     public  function pageProfilUpdate(int $id, Request $request, UserPasswordEncoderInterface $encoder, AuthenticationUtils $authenticationUtils, UserRepository $userRepository){
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($id);
@@ -231,6 +280,21 @@ class DefaultController extends AbstractController
         $em->persist($user);
         $em->flush();
         return $this->redirectToRoute('profil_update');
+    }
+
+    #[Route('/admin/url-bilgileri', name: 'url_stats')]
+    public function urlStats(UserRepository $userRepository, UrlStatsRepository $urlStatsRepository){
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository(ContactMessages::class)->findAll();
+        $urlStats = $urlStatsRepository->findAll();
+        $users = $userRepository->findAll();
+
+
+        return $this->render('admin/default/url-bilgileri.html.twig', [
+            'messages' => $messages,
+            'users' => $users,
+            'urlStats' => $urlStats
+        ]);
     }
 
 

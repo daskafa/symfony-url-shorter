@@ -1,0 +1,59 @@
+{% extends 'admin/layouts/adminBase.html.twig' %}
+
+{#{% block title %}Hello DefaultController!{% endblock %}#}
+
+{% block body %}
+{#    {% if is_granted('ROLE_ADMIN') %} ... burası admin {% endif %}#}
+
+
+
+    {% include 'admin/layouts/header.html.twig' %}
+
+
+    <div class="bg-white">
+        <div class="grid grid-cols-12">
+            <div class="col-span-2">
+{#                {% include 'admin/layouts/leftSection.html.twig' %}#}
+            </div>
+            <div class="col-span-10">
+                <div class="rounded-md">
+                    <section class="text-gray-600 body-font">
+                        <form action="/admin/kayitli-kullanicilar/editpost/{{ cometoid }}" method="post">
+                            <input type="text" name="mail" placeholder="yeni mail adresi">
+                            <input type="password" name="password" placeholder="yeni şifreniz">
+                            <button type="submit">güncelle</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{#<div class="example-wrapper">#}
+
+
+{#    <p>Kısaltma Yapılmış URL Listesi ve Hash'leri: </p>#}
+{#    <ul>#}
+{#        {% for url in urls %}#}
+{#        <li>{{ url.url }} <p style="color: darkred">Hash: <a href="http://pa.th/{{ url.getUrlHash() }}" target="_blank">http://pa.th/{{ url.getUrlHash() }}</a></p></li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#    <p>Toplam Hash Sayısı: {{ urls | length }}</p>#}
+
+
+{#    <p>Kayıtlı Kullanıcılar: Toplam {{ users | length }} adet.</p>#}
+{#    <ul>#}
+{#        {% for user in users %}#}
+{#        <li>{{ user.email }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+
+
+
+
+{#</div>#}
+{% endblock %}

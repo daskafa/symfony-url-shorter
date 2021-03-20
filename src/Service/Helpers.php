@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Url;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,6 +22,14 @@ class Helpers
             return 0;
         }
         return $user;
+    }
+
+    public function getUrls(int $urlId){
+        $url = $this->entityManager->getRepository(Url::class)->findOneBy([ 'user_id' => $urlId ]);
+        if ( is_null($url) ){
+            return 0;
+        }
+        return $url;
     }
 
 }
