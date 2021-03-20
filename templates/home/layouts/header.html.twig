@@ -1,23 +1,22 @@
 <div>
-        <img src="{{ configs[7].content }}" class="h-12" alt="">
+    <a href="/"><img src="{{ configs[7].content }}" class="h-12" alt=""></a>
 </div>
 <div>
     <ul class="flex items-center">
 
         {% if "ROLE_ADMIN" in app.user.roles ?? '' %}
-            <li><p class="mr-8 text-white border-2 py-2 px-4 rounded-xl">Hoşgeldin <span class="text-yellow-500 font-bold">Admin</span> | <span class="text-green-500 font-bold">{{ app.user.username }}</span> </p></li>
-            <li><a class="mr-8     text-white py-2 px-4 border-yellow-400 border-2 hover:bg-transparent transition duration-500 font-bold bg-yellow-400 rounded-xl hover:text-green-500" href="/admin">Admin Paneli</a></li>
-            <li><a class="text-white py-2 px-4 border-2 border-green-400 hover:bg-transparent transition duration-500 font-bold bg-green-500 rounded-xl" href="/logout">Çıkış Yap</a></li>
+            <li><p class="mr-8 text-white border-2 py-2 px-4 rounded-xl">Hoşgeldin <span class="text-yellow-400 font-normal">Admin</span> | <span class="text-green-500 font-normal">{{ app.user.username }}</span> </p></li>
+            <li><a class="mr-8     text-white py-2 px-4 border-yellow-400 border-2 hover:bg-transparent transition duration-500 font-normal bg-yellow-400 rounded-xl hover:text-green-500" href="/admin">Admin Paneli</a></li>
+            <li><a class="text-white py-2 px-4 border-2 border-green-400 hover:bg-transparent transition duration-500 font-normal bg-green-500 rounded-xl" href="/logout">Çıkış Yap</a></li>
         {% elseif "ROLE_USER" in app.user.roles ?? '' %}
-                <li><p class="mr-8 text-white border-2 py-2 px-4 rounded-xl">Hoşgeldin <span class="text-yellow-500 font-bold">Sıradan Kullanıcı</span> | <span class="text-green-500 font-bold">{{ app.user.username }}</span> </p></li>
-                <li><a class="mr-8     text-white py-2 px-4 border-yellow-400 border-2 hover:bg-transparent transition duration-500 font-bold bg-yellow-400 rounded-xl hover:text-green-500" href="/admin">Admin Paneli</a></li>
-                <li><a class="text-white py-2 px-4 border-2 border-green-400 hover:bg-transparent transition duration-500 font-bold bg-green-500 rounded-xl" href="/logout">Çıkış Yap</a></li>
+                <li><p class="mr-8 text-white border-2 py-2 px-4 rounded-xl">Hoşgeldin <span class="text-yellow-400 font-normal">Sıradan Kullanıcı</span> | <span class="text-green-500 font-normal">{{ app.user.username }}</span> </p></li>
+                <li><a class="mr-8     text-white py-2 px-4 border-yellow-400 border-2 hover:bg-transparent transition duration-500 font-normal bg-yellow-400 rounded-xl hover:text-green-500" href="/admin">Admin Paneli</a></li>
+                <li><a class="text-white py-2 px-4 border-2 border-green-400 hover:bg-transparent transition duration-500 font-normal bg-green-500 rounded-xl" href="/logout">Çıkış Yap</a></li>
         {% else%}
-            <li><a class="mr-8 text-white border-2 py-2 px-4 rounded-xl transition duration-500 font-bold" href="/iletisim">İletişim</a></li>
-            <li><a class="mr-8     text-white py-2 px-4 border-yellow-400 border-2 hover:bg-transparent transition duration-500 font-bold bg-yellow-400 rounded-xl hover:text-green-500" href="/login">Login</a></li>
-            <li><a class="text-white py-2 px-4 border-2 border-green-400 hover:bg-transparent transition duration-500 font-bold bg-green-500 rounded-xl" href="/signupview">Sign Up</a></li>
+            <li><a class="mr-8 text-white border-2 py-2 px-4 rounded-xl transition duration-500 font-normal" href="/iletisim">İletişim</a></li>
+            <li><a class="mr-8 text-white py-2 px-4 border-2 border-green-500 hover:bg-transparent transition duration-500 font-normal bg-green-500 rounded-xl" href="/login">Login</a></li>
+            <li><a class="    text-white py-2 px-4 border-yellow-400 border-2 hover:bg-transparent transition duration-500 font-normal bg-yellow-400 rounded-xl hover:text-green-500" href="/signupview">Sign Up</a></li>
         {% endif %}
-
 
     </ul>
 </div>

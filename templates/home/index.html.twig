@@ -7,7 +7,7 @@
         </div>
     </div>
     {% include 'home/layouts/banner.html.twig' %}
-    <div class="bg-gray-100 px-96">
+    <div class="hexagons bg-gray-100 px-96">
         <div class="mt-16 pb-24">
             <h3 class="text-3xl text-center text-blue-900 font-bold">Link analytics, branded urls, URL shortener</h3>
             <p class="text-sm text-center text-gray-500 mt-3">Don't let the links limit you. Make your links support your brand. The new standard of shortening links. A new standard for link analytics. Discover
@@ -26,100 +26,10 @@
     <div class="nice-blue-bg">
         {% include 'home/layouts/features.html.twig' %}
     </div>
-
-    <div class="bg-gray-200 py-24">
-        <p class="text-center text-4xl font-bold">footer</p>
-    </div>
-
-
-
-{#    <div class="homepage">#}
-{#<h1>{{ posts[0].getLogo }}</h1>#}
-{#        <section class="banner">#}
-{#            <div class="container">#}
-{#                <div class="col w-50p">#}
-{#                    <h1>{{ posts[0].getTitle }}</h1>#}
-{#                    <p>{{ posts[0].getDescription }}#}
-{#                    </p>#}
-{#                    <a href="/signup" class="button button-primary">{{ posts[0].getButtonText }}</a>#}
-{#                </div>#}
-{#                <div class="col w-50p">#}
-{#                    <img src="{{ posts[0].getRightImage }}"/>#}
-{#                </div>#}
-{#            </div>#}
-{#        </section>#}
-
-
-
-{#        <div class="url-form">#}
-{#            <div class="container row">#}
-
-{#                <form action="/url/create" method="post" onsubmit="return createShortUrl()">#}
-{#                    <input id="urlinput" type="text" name="url" placeholder="Shorten your link" />#}
-{#                    <button id="shortenButton" class="button button-primary" type="submit">Shorten</button>#}
-{#                </form>#}
-
-{#                <div class="url-form-terms">#}
-{#                    {{ posts[0].getPrivacyPolicy }}#}
-{#                    <a href="/terms">{{ posts[0].getPrivacyPolicyFirst }}</a> and <a href="/privacy">{{ posts[0].getPrivacyPolicyTwo }}</a>#}
-{#                </div>#}
-
-{#                <div class="flash-messages">#}
-{#                    <div class="form-error"></div>#}
-{#                    <div class="form-success"></div>#}
-{#                </div>#}
-
-{#            </div>#}
-{#        </div>#}
-
-
-{#        <section class="features">#}
-{#            <div class="container row">#}
-{#                <h3 class="features-title">{{ posts[0].getFeaturesTitle }}</h3>#}
-{#                <p class="features-description">#}
-{#                    {{ posts[0].getFeaturesDescription }}#}
-{#                </p>#}
-
-{#                <div class="feature-rows">#}
-{#                    <div class="feature">#}
-{#                        <img src="{{ posts[0].getFeaturesItem1Image }}" />#}
-{#                        <h3>{{ posts[0].getFeaturesItem1Title }}</h3>#}
-{#                        <p>#}
-{#                            {{ posts[0].getFeaturesItem1Description }}#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="feature">#}
-{#                        <img src="{{ posts[0].getFeaturesItem2Image }}" />#}
-{#                        <h3>{{ posts[0].getFeaturesItem2Title }}</h3>#}
-{#                        <p>#}
-{#                            {{ posts[0].getFeaturesItem2Description }}#}
-{#                        </p>#}
-{#                    </div>#}
-
-{#                    <div class="feature">#}
-{#                        <img src="{{ posts[0].getFeaturesItem3Image }}" />#}
-{#                        <h3>{{ posts[0].getFeaturesItem3Title }}</h3>#}
-{#                        <p>#}
-{#                            {{ posts[0].getFeaturesItem3Description }}#}
-{#                        </p>#}
-{#                    </div>#}
-{#                </div>#}
-
-{#            </div>#}
-{#        </section>#}
-
-
-{#        <section class="happy-customers">#}
-{#            <div class="container">#}
-
-{#            </div>#}
-{#        </section>#}
-
-{#    </div>#}
-{% endblock %}
-
-
-{% block footer %}
+<div>
     {% include 'inc/footer.html.twig' %}
+</div>
 {% endblock %}
+
+
+
