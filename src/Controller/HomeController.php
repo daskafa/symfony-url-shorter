@@ -33,7 +33,6 @@ class HomeController extends AbstractController
             'features' => $features
         ]);
     }
-
     #[Route('/iletisim', name: 'contact')]
     public function contactView(HomepageInterfaceRepository $homepageInterfaceRepository, PageConfigsRepository $pageConfigsRepository){
         $posts = $homepageInterfaceRepository->findAll();
@@ -43,33 +42,23 @@ class HomeController extends AbstractController
            'configs' => $pageConfigs
         ]);
     }
-
     #[Route('/iletisimPost', name: 'contactPost')]
     public function contactPost( Request $request){
         $em = $this->getDoctrine()->getManager();
-
         $contactPosts = new ContactMessages();
-
         $contactPosts->setName($request->get('name'))
             ->setEmail($request->get('email'))
             ->setMessage($request->get('message'));
-
         $em->persist($contactPosts);
         $em->flush();
-
         return $this->redirectToRoute('home');
     }
-
     #[Route('/delete-post/{id}', name: 'deletePost')]
     public function deleteContactPost(int $id){
         $entityManager = $this->getDoctrine()->getManager();
         $contactPost = $entityManager->getRepository(ContactMessages::class)->find($id);
-
         $entityManager->remove($contactPost);
         $entityManager->flush();
         return $this->redirectToRoute('contact_messages');
-
     }
-
-
 }

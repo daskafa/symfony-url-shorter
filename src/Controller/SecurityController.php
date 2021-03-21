@@ -52,9 +52,6 @@ class SecurityController extends AbstractController
         ]);
     }
 
-
-
-
     /**
      * @Route("/signup", name="app_signup")
      */
@@ -65,18 +62,14 @@ class SecurityController extends AbstractController
 
         $email = $request->get('email');
         $encodedPassword = $encoder->encodePassword($user, $request->get('password'));
-
         $user->setEmail($email)
             ->setPassword($encodedPassword)
             ->setIsActive('')
             ->setRoles(['ROLE_ADMIN']);
 
         $em = $this->getDoctrine()->getManager();
-
         $em->persist($user);
         $em->flush();
-
         return $this->redirectToRoute('admin_default');
-
     }
 }

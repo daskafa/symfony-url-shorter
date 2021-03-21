@@ -30,7 +30,6 @@ class DefaultController extends AbstractController
     public function index(): Response
     {
         $em = $this->getDoctrine()->getManager();
-
         $urls = $em->getRepository(Url::class)->findAll();
         $users = $em->getRepository(User::class)->findAll();
         $messages = $em->getRepository(ContactMessages::class)->findAll();
@@ -46,16 +45,12 @@ class DefaultController extends AbstractController
         $urls = $urlRepository->findAll();
         $users = $userRepository->findAll();
         $messages = $contactMessagesRepository->findAll();
-
         return $this->render('admin/default/url-list.html.twig',[
             'urls' => $urls,
             'users' => $users,
             'messages' => $messages
         ]);
     }
-
-
-
     #[Route('/admin/kayitli-kullanicilar', name: 'registered_users')]
     public function registeredUsers(UserRepository $userRepository): Response{
         $em = $this->getDoctrine()->getManager();
@@ -66,7 +61,6 @@ class DefaultController extends AbstractController
             'messages' => $messages
         ]);
     }
-
     #[Route('/admin/kayitli-kullanicilar/delete/{id}', name: 'registered_users_delete')]
     public function deleteRegisteredUsers(int $id){
         $em = $this->getDoctrine()->getManager();
@@ -76,8 +70,6 @@ class DefaultController extends AbstractController
 
         return $this->redirectToRoute('admin_default');
     }
-
-
       #[Route('/admin/kayitli-kullanicilar/edit/{id}', name: 'registered_users_update_page')]
       public function editRegisteredUsers(int $id, UserRepository $userRepository){
         $users = $userRepository->findAll();
@@ -85,7 +77,6 @@ class DefaultController extends AbstractController
             'users' => $users
         ]);
       }
-
       #[Route('/admin/kayitli-kullanicilar/editpost/{id}', name: 'registered_users_update_page_post')]
       public function editRegisteredUsersX(int $id, Request $request){
           $em = $this->getDoctrine()->getManager();
@@ -97,69 +88,19 @@ class DefaultController extends AbstractController
 
         return $this->render('admin/default/edit-users.html.twig');
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    #[Route('/admin/banner-alani-duzenleme', name: 'banner_alani_duzenleme')]
-//    public function bannerField(): Response{
-//        return $this->render('admin/default/banner-field.html.twig',[
-//        ]);
-//    }
-
-    #[Route('/admin/banner-alani-duzenleme-edit', name: 'banner_alani_duzenleme_edit')]
-    public function bannerFieldEdit(Request $request, HomepageInterfaceRepository $homepageInterfaceRepository): Response{
-        $all = $homepageInterfaceRepository->findAll();
-        dd($all[0]);
-        $title = $all[0]->getTitle();
-        $description = $all[0]->getDescription();
-        $buttonText = $all[0]->getButtonText();
-
-        $title = $request->get('title');
-        $description = $request->get('description'); // CONTACT ENTİTY OLUŞTUR, EN SON SİLMİŞTİN
-        $buttonText = $request->get('button');
-
-        $homepageInterface = new HomepageInterface();
-        $homepageInterface->setTitle($title)
-            ->setDescription($description)
-            ->setButtonText($buttonText);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($homepageInterface);
-        $em->flush();
-        return $this->redirectToRoute('admin_default');
-    }
     #[Route('/admin/gelen-mesajlar', name: 'contact_messages')]
     public function contactMessages(ContactMessagesRepository $contactMessagesRepository, UserRepository $userRepository){
         $users = $userRepository->findAll();
-
         $messages = $contactMessagesRepository->findAll();
-
-
         return $this->render('admin/default/contact-messages.html.twig',[
             'messages' => $messages,
             'users' => $users
         ]);
     }
-
     #[Route('/admin/gelen-mesajlar/{id}', name: 'contact_is_read')]
     public function contactMessagesIsRead(int $id, ContactMessagesRepository $contactMessagesRepository){
         $em = $this->getDoctrine()->getManager();
         $product = $em->getRepository(ContactMessages::class)->find($id);
-
         if ($product->getIsRead() == false){
             $product->setIsRead(1);
         }else{
@@ -169,7 +110,6 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('contact_messages');
     }
-
     #[Route('/admin/sayfa-ayarlari', name: 'page_config')]
     public function pageConfigsView(UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository){
         $em = $this->getDoctrine()->getManager();
@@ -180,7 +120,6 @@ class DefaultController extends AbstractController
             'messages' => $messages
         ]);
     }
-
     #[Route('/admin/sayfa-title')]
     public function pageConfigTitle(Request $request, PageConfigsRepository $pageConfigsRepository){
         $em = $this->getDoctrine()->getManager();
@@ -190,7 +129,6 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('page_config');
     }
-
     #[Route('/admin/sayfa-description')]
     public function pageConfigDescription(Request $request, PageConfigsRepository $pageConfigsRepository){
         $em = $this->getDoctrine()->getManager();
@@ -200,7 +138,6 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('page_config');
     }
-
     #[Route('/admin/sayfa-buton')]
     public function pageConfigButton(Request $request, PageConfigsRepository $pageConfigsRepository){
         $em = $this->getDoctrine()->getManager();
@@ -210,7 +147,6 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('page_config');
     }
-
     #[Route('/admin/sayfa-privacy')]
     public function pageConfigPrivacy(Request $request, PageConfigsRepository $pageConfigsRepository){
         $em = $this->getDoctrine()->getManager();
@@ -220,7 +156,6 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('page_config');
     }
-
     #[Route('/admin/sayfa-privacy-2')]
     public function pageConfigPrivacy2(Request $request, PageConfigsRepository $pageConfigsRepository){
         $em = $this->getDoctrine()->getManager();
@@ -230,7 +165,6 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('page_config');
     }
-
     #[Route('/admin/sayfa-privacy-3')]
     public function pageConfigPrivacy3(Request $request, PageConfigsRepository $pageConfigsRepository){
         $em = $this->getDoctrine()->getManager();
@@ -240,35 +174,28 @@ class DefaultController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('page_config');
     }
-
     #[Route('/admin/ozellikler', name: 'features')]
     public function pageFeatures(UserRepository $userRepository, FeaturesRepository $featuresRepository, ContactMessagesRepository $contactMessagesRepository){
         $em = $this->getDoctrine()->getManager();
         $messages = $em->getRepository(ContactMessages::class)->findAll();
         $users = $userRepository->findAll();
         $feature = $featuresRepository->findAll();
-
-
         return $this->render('admin/default/features.html.twig', [
             'users' => $users,
             'feature' => $feature,
             'messages' => $messages
         ]);
     }
-
     #[Route('/admin/ozellikler/{id}', name: 'features_update')]
     public function pageFeatureUpdate(int $id, Request $request){
         $em = $this->getDoctrine()->getManager();
         $feature = $em->getRepository(Features::class)->find($id);
-
         $feature->setTitle($request->get('title'))
             ->setDescription($request->get('description'));
-
         $em->persist($feature);
         $em->flush();
         return $this->redirectToRoute('features');
     }
-
     #[Route('/admin/profil-guncelle', name: 'profil_update')]
     public function pageProfilView(UserRepository $userRepository, ContactMessagesRepository $contactMessagesRepository){
         $em = $this->getDoctrine()->getManager();
@@ -279,49 +206,28 @@ class DefaultController extends AbstractController
             'messages' => $messages
         ]);
     }
-
     #[Route('/admin/profil-guncelle/{id}', name: 'profil_update_id')]
     public  function pageProfilUpdate(int $id, Request $request, UserPasswordEncoderInterface $encoder, AuthenticationUtils $authenticationUtils, UserRepository $userRepository){
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($id);
-//        $user = $userRepository->findAll();
-
-
         $email = $request->get('email');
         $encodedPassword = $encoder->encodePassword($user, $request->get('password'));
         $user->setEmail($email)
             ->setPassword($encodedPassword);
-
         $em->persist($user);
         $em->flush();
         return $this->redirectToRoute('profil_update');
     }
-
     #[Route('/admin/url-bilgileri', name: 'url_stats')]
     public function urlStats(UserRepository $userRepository, UrlStatsRepository $urlStatsRepository){
         $em = $this->getDoctrine()->getManager();
         $messages = $em->getRepository(ContactMessages::class)->findAll();
         $urlStats = $urlStatsRepository->findAll();
         $users = $userRepository->findAll();
-
-
         return $this->render('admin/default/url-bilgileri.html.twig', [
             'messages' => $messages,
             'users' => $users,
             'urlStats' => $urlStats
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
