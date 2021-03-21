@@ -42,7 +42,21 @@
 {#                                        {{ dump(urlStat.urlId) }}#}
                                 {% if urlStat.getUrlId != 0 %}
 {#                                    {{ dump(urlStat.getUrlId()) }}#}
-                                    {{ helpers.getUrls(urlStat.getUrlId).url }}
+
+                                    {% if helpers.getUrls(urlStat.getUrlId) %}
+                                    <p class="nice-blue font-bold">{{ helpers.getUrls(urlStat.getUrlId).url }}</p>
+
+                                    {% else %}
+                                        <p class="text-red-600 font-bold">Kısaltma Silinmiş</p>
+                                        {% endif %}
+
+
+
+
+
+
+
+{#                                    {{ helpers.getUrls(urlStat.getUrlId).url }} #}{# parametre aldığı yer problemli #}
 {#                                    {% if urlStat.UrlId == helpers.getUrls(urlStat.getUrlId).getUserId %}#}
 {#                                        ilk durum#}
 {#                                        {% else %}#}
